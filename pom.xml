@@ -12,6 +12,8 @@
     <module>desgin-mode</module>
     <module>jvm</module>
     <module>muti-thread</module>
+    <module>serialize</module>
+    <module>class-loader</module>
   </modules>
 
 

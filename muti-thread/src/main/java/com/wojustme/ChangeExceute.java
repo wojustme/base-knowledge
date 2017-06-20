@@ -1,5 +1,6 @@
 package com.wojustme;
 
+
 /**
  * 改变变量，从而改变线程执行
  * Created by wojustme on 2017/6/13.
