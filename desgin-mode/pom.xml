@@ -11,5 +11,13 @@
 
   <artifactId>desgin-mode</artifactId>
 
+  <dependencies>
+    <!-- cglib代理，可以代理没有实现接口的类 -->
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.2.5</version>
+    </dependency>
+  </dependencies>
 
 </project>
