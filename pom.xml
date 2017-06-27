@@ -14,6 +14,7 @@
     <module>muti-thread</module>
     <module>serialize</module>
     <module>class-loader</module>
+    <module>start-netty</module>
   </modules>
 
 
