@@ -14,7 +14,16 @@
     <module>muti-thread</module>
     <module>serialize</module>
     <module>class-loader</module>
+    <module>scheduler</module>
   </modules>
 
+
+  <dependencies>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+  </dependencies>
 
 </project>
