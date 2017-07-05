@@ -29,5 +29,6 @@ package com.wojustme.proxy;
 public interface Hello {
 
   void say(String hello);
+  void error(String error);
 
 }

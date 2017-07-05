@@ -1,6 +1,4 @@
-package com.wojustme.proxy.cglib;
-
-import com.wojustme.proxy.Hello;
+package com.wojustme.threadlocal;
 
 /**
  * ////////////////////////////////////////////////////////////////////
@@ -26,14 +24,8 @@ import com.wojustme.proxy.Hello;
  * //             佛祖保佑       永无BUG     永不修改                   //
  * ////////////////////////////////////////////////////////////////////
  * <p>
- * wojustme于2017/6/25祈祷...
+ * wojustme于2017/6/29祈祷...
  */
-public class AppMain {
-
-  public static void main(String[] args) {
-    Hello helloProxy = CGLibProxy.getInstance().getProxy(HelloImp2.class);
-
-    helloProxy.say("wojustme");
-  }
-
+public interface Sequence {
+  int getNumber();
 }

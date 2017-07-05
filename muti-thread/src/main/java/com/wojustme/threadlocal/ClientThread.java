@@ -1,6 +1,4 @@
-package com.wojustme.proxy.staticmode;
-
-import com.wojustme.proxy.Hello;
+package com.wojustme.threadlocal;
 
 /**
  * ////////////////////////////////////////////////////////////////////
@@ -26,34 +24,19 @@ import com.wojustme.proxy.Hello;
  * //             佛祖保佑       永无BUG     永不修改                   //
  * ////////////////////////////////////////////////////////////////////
  * <p>
- * wojustme于2017/6/25祈祷...
+ * wojustme于2017/6/29祈祷...
  */
-public class HelloProxy implements Hello {
+public class ClientThread extends Thread {
+  private Sequence sequence;
 
-  private Hello hello;
-
-  public HelloProxy() {
-    hello = new HelloImpl();
+  public ClientThread(Sequence sequence) {
+    this.sequence = sequence;
   }
 
   @Override
-  public void say(String name) {
-    before();
-    hello.say(name);
-    after();
-  }
-  @Override
-  public void error(String name) {
-    before();
-    hello.error(name);
-    after();
-  }
-
-  private void after() {
-    System.out.println("after");
-  }
-
-  private void before() {
-    System.out.println("before");
+  public void run() {
+    for (int i = 0; i < 3; i++) {
+      System.out.println(Thread.currentThread().getName() + "=>" + sequence.getNumber());
+    }
   }
 }

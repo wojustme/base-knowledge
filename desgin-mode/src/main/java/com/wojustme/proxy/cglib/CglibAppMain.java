@@ -1,4 +1,4 @@
-package com.wojustme.proxy.staticmode;
+package com.wojustme.proxy.cglib;
 
 import com.wojustme.proxy.Hello;
 
@@ -28,32 +28,13 @@ import com.wojustme.proxy.Hello;
  * <p>
  * wojustme于2017/6/25祈祷...
  */
-public class HelloProxy implements Hello {
+public class CglibAppMain {
 
-  private Hello hello;
+  public static void main(String[] args) {
+    Hello helloProxy = CGLibProxy.getInstance().getProxy(HelloImp2.class);
 
-  public HelloProxy() {
-    hello = new HelloImpl();
+    helloProxy.say("wojustme");
+    helloProxy.error("wojustme");
   }
 
-  @Override
-  public void say(String name) {
-    before();
-    hello.say(name);
-    after();
-  }
-  @Override
-  public void error(String name) {
-    before();
-    hello.error(name);
-    after();
-  }
-
-  private void after() {
-    System.out.println("after");
-  }
-
-  private void before() {
-    System.out.println("before");
-  }
 }

@@ -58,9 +58,9 @@ public class CGLibProxy implements MethodInterceptor {
 
 
   private void before() {
-    System.out.println("动态代理2before...");
+    System.out.println("cglib动态代理2before...");
   }
   private void after() {
-    System.out.println("动态代理2after...");
+    System.out.println("cglib动态代理2after...");
   }
 }

@@ -1,22 +1,24 @@
 package com.wojustme.netty.socket;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.ReferenceCountUtil;
 
 /**
- * Created by xurenhe on 2017/6/22.
+ * @author wojustme
+ * @date 2017/7/3
+ * @package com.wojustme.netty.socket
  */
-public class MySocketServer {
+public class DiscardServer {
 
-  private int port;// 绑定端口
+  private int port;
 
-  public MySocketServer(int port) {
+  public DiscardServer(int port) {
     this.port = port;
   }
 
@@ -30,7 +32,7 @@ public class MySocketServer {
           .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
             @Override
             public void initChannel(SocketChannel ch) throws Exception {
-
+              ch.pipeline().addLast(new DiscardServerHandler());
             }
           })
           .option(ChannelOption.SO_BACKLOG, 128)          // (5)
@@ -46,5 +48,36 @@ public class MySocketServer {
       workerGroup.shutdownGracefully();
       bossGroup.shutdownGracefully();
     }
+  }
+
+  public static void main(String[] args) throws Exception {
+
+    new DiscardServer(9527).run();
+  }
+}
+
+
+class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
+
+  @Override
+  public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
+//    // 默默地丢弃收到的数据
+//    ((ByteBuf) msg).release(); // (3)
+    ByteBuf in = (ByteBuf) msg;
+    try {
+      while (in.isReadable()) { // (1)
+        System.out.print((char) in.readByte());
+        System.out.flush();
+      }
+    } finally {
+      ReferenceCountUtil.release(msg); // (2)
+    }
+  }
+
+  @Override
+  public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) { // (4)
+    // 当出现异常就关闭连接
+    cause.printStackTrace();
+    ctx.close();
   }
 }

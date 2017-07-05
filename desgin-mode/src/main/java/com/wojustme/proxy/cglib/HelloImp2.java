@@ -32,4 +32,9 @@ public class HelloImp2 implements Hello {
   public void say(String name) {
     System.out.println(name +" use cglib do proxy");
   }
+
+  @Override
+  public void error(String error) {
+    System.out.println(error + " do error!");
+  }
 }

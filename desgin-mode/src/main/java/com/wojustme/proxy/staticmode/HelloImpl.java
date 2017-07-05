@@ -33,4 +33,9 @@ public class HelloImpl implements Hello {
   public void say(String hello) {
     System.out.println(hello + " say hello!");
   }
+
+  @Override
+  public void error(String error) {
+    System.out.println(error + " do error!");
+  }
 }
